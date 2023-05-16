@@ -15,8 +15,6 @@
 		39509EB829F5665F008E3318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39509EB629F5665F008E3318 /* Main.storyboard */; };
 		39509EBA29F5665F008E3318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39509EB929F5665F008E3318 /* Assets.xcassets */; };
 		39509EBD29F5665F008E3318 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39509EBB29F5665F008E3318 /* LaunchScreen.storyboard */; };
-		39EDFF3C2A0B8CA00064FAB0 /* NewUserScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39EDFF3B2A0B8CA00064FAB0 /* NewUserScene.sks */; };
-		39EDFF3E2A0B8E130064FAB0 /* NewUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDFF3D2A0B8E130064FAB0 /* NewUserController.swift */; };
 		39EDFF402A0B8EE40064FAB0 /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDFF3F2A0B8EE40064FAB0 /* LandingController.swift */; };
 		39EDFF422A0B8F010064FAB0 /* LandingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39EDFF412A0B8F010064FAB0 /* LandingScene.sks */; };
 		39EDFF442A0B8F470064FAB0 /* PlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39EDFF432A0B8F470064FAB0 /* PlayScene.sks */; };
@@ -43,8 +41,6 @@
 		39509EB729F5665F008E3318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39509EB929F5665F008E3318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39509EBC29F5665F008E3318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		39EDFF3B2A0B8CA00064FAB0 /* NewUserScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewUserScene.sks; sourceTree = "<group>"; };
-		39EDFF3D2A0B8E130064FAB0 /* NewUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserController.swift; sourceTree = "<group>"; };
 		39EDFF3F2A0B8EE40064FAB0 /* LandingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
 		39EDFF412A0B8F010064FAB0 /* LandingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LandingScene.sks; sourceTree = "<group>"; };
 		39EDFF432A0B8F470064FAB0 /* PlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayScene.sks; sourceTree = "<group>"; };
@@ -111,7 +107,6 @@
 				39EDFF4B2A0B8FA60064FAB0 /* FinishController.swift */,
 				39509EB229F5665F008E3318 /* GameController.swift */,
 				39EDFF3F2A0B8EE40064FAB0 /* LandingController.swift */,
-				39EDFF3D2A0B8E130064FAB0 /* NewUserController.swift */,
 				39EDFF452A0B8F540064FAB0 /* PlayController.swift */,
 				39EDFF552A0B90430064FAB0 /* SettingController.swift */,
 				39EDFF492A0B8F9B0064FAB0 /* StageController.swift */,
@@ -127,7 +122,6 @@
 				39EDFF512A0B8FEA0064FAB0 /* FinishScene.sks */,
 				39509EAE29F5665F008E3318 /* GameScene.sks */,
 				39EDFF412A0B8F010064FAB0 /* LandingScene.sks */,
-				39EDFF3B2A0B8CA00064FAB0 /* NewUserScene.sks */,
 				39EDFF432A0B8F470064FAB0 /* PlayScene.sks */,
 				39EDFF592A0B90C30064FAB0 /* SettingScene.sks */,
 				39EDFF4F2A0B8FD90064FAB0 /* StageScene.sks */,
@@ -209,7 +203,6 @@
 				39509EAF29F5665F008E3318 /* GameScene.sks in Resources */,
 				39EDFF5A2A0B90C30064FAB0 /* SettingScene.sks in Resources */,
 				39EDFF582A0B90AB0064FAB0 /* AchievementScene.sks in Resources */,
-				39EDFF3C2A0B8CA00064FAB0 /* NewUserScene.sks in Resources */,
 				39509EBA29F5665F008E3318 /* Assets.xcassets in Resources */,
 				39509EBD29F5665F008E3318 /* LaunchScreen.storyboard in Resources */,
 				39509EB129F5665F008E3318 /* Actions.sks in Resources */,
@@ -234,7 +227,6 @@
 				39EDFF402A0B8EE40064FAB0 /* LandingController.swift in Sources */,
 				39EDFF562A0B90430064FAB0 /* SettingController.swift in Sources */,
 				39EDFF482A0B8F800064FAB0 /* StartingStageController.swift in Sources */,
-				39EDFF3E2A0B8E130064FAB0 /* NewUserController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
