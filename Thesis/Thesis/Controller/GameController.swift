@@ -11,9 +11,8 @@ import GameplayKit
 class GameController: SKScene {
     
     override func didMove(to view: SKView) {
-        addNode(imageName: "background", name: "background", widthSize: 750, heightSize: 1334, xPos: 0, yPos: 0, zPos: -1)
-        addNode(imageName: "logo", name: "logo", widthSize: 500, heightSize: 500, xPos: 0, yPos: 0, zPos: 0)
-        
+        addImage(imageName: "background", name: "background", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
+        addImage(imageName: "logo", name: "logo", widthSize: 300, heightSize: 300, xPos: 0, yPos: 0, zPos: 0)
     }
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -37,13 +36,13 @@ class GameController: SKScene {
         }
     }
     
-    func addNode(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let homeAsset = SKSpriteNode(imageNamed: imageName)
-        homeAsset.name = name
-        homeAsset.size = CGSize(width: widthSize, height: heightSize)
-        homeAsset.position = CGPoint(x: xPos, y: yPos)
-        homeAsset.zPosition = zPos
-        addChild(homeAsset)
+    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
+        let gameAsset = SKSpriteNode(imageNamed: imageName)
+        gameAsset.name = name
+        gameAsset.size = CGSize(width: widthSize, height: heightSize)
+        gameAsset.position = CGPoint(x: xPos, y: yPos)
+        gameAsset.zPosition = zPos
+        addChild(gameAsset)
     }
     
     override func update(_ currentTime: TimeInterval) {
