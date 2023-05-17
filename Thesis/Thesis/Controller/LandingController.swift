@@ -11,12 +11,12 @@ import GameplayKit
 class LandingController: SKScene {
     
     override func didMove(to view: SKView) {
-        addImage(imageName: "background", name: "background", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
-        addImage(imageName: "header_background", name: "header_background", widthSize: 125, heightSize: 120, xPos: -132.5, yPos: 327.5, zPos: 0)
-        addImage(imageName: "subheader_background", name: "subheader_background", widthSize: 275, heightSize: 120, xPos: 57.5, yPos: 327.5, zPos: 0)
-        addImage(imageName: "landing_button", name: "start_button", widthSize: 200, heightSize: 120, xPos: 0, yPos: 100, zPos: 0)
-        addImage(imageName: "landing_button", name: "achievement_button", widthSize: 200, heightSize: 120, xPos: 0, yPos: -80, zPos: 0)
-        addImage(imageName: "landing_button", name: "setting_button", widthSize: 200, heightSize: 120, xPos: 0, yPos: -260, zPos: 0)
+        addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
+        addImage(imageName: "background_header", name: "background_header", widthSize: 125, heightSize: 120, xPos: -132.5, yPos: 327.5, zPos: 0)
+        addImage(imageName: "background_subheader", name: "background_subheader", widthSize: 275, heightSize: 120, xPos: 57.5, yPos: 327.5, zPos: 0)
+        addImage(imageName: "button_landing", name: "button_start", widthSize: 200, heightSize: 120, xPos: 0, yPos: 100, zPos: 0)
+        addImage(imageName: "button_landing", name: "button_achievement", widthSize: 200, heightSize: 120, xPos: 0, yPos: -80, zPos: 0)
+        addImage(imageName: "button_landing", name: "button_setting", widthSize: 200, heightSize: 120, xPos: 0, yPos: -260, zPos: 0)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -24,39 +24,39 @@ class LandingController: SKScene {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
             
-            if (node.name == "start_button") {
+            if (node.name == "button_start") {
                 if let nextScene = SKScene(fileNamed: "PlayScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
-            else if (node.name == "start_label") {
+            else if (node.name == "label_start") {
                 if let nextScene = SKScene(fileNamed: "PlayScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
             
-            else if (node.name == "achievement_button") {
+            else if (node.name == "button_achievement") {
                 if let nextScene = SKScene(fileNamed: "AchievementScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
-            else if (node.name == "achievement_label") {
+            else if (node.name == "label_achievement") {
                 if let nextScene = SKScene(fileNamed: "AchievementScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
             
-            else if (node.name == "setting_button") {
+            else if (node.name == "button_setting") {
                 if let nextScene = SKScene(fileNamed: "SettingScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
-            else if (node.name == "setting_label") {
+            else if (node.name == "label_setting") {
                 if let nextScene = SKScene(fileNamed: "SettingScene") {
                     self.scene?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(nextScene)

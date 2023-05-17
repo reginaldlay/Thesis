@@ -11,7 +11,7 @@ import GameplayKit
 class GameController: SKScene {
     
     override func didMove(to view: SKView) {
-        addImage(imageName: "background", name: "background", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
+        addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
         addImage(imageName: "logo", name: "logo", widthSize: 300, heightSize: 300, xPos: 0, yPos: 0, zPos: 0)
     }
     
