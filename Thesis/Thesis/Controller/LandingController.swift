@@ -17,6 +17,9 @@ class LandingController: SKScene {
         addImage(imageName: "button_landing", name: "button_start", widthSize: 200, heightSize: 120, xPos: 0, yPos: 100, zPos: 0)
         addImage(imageName: "button_landing", name: "button_achievement", widthSize: 200, heightSize: 120, xPos: 0, yPos: -80, zPos: 0)
         addImage(imageName: "button_landing", name: "button_setting", widthSize: 200, heightSize: 120, xPos: 0, yPos: -260, zPos: 0)
+        addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 36, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 90, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_achievement", text: "Achievement", fontSize: 27, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -85, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 36, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -270, zPos: 1)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,16 +77,15 @@ class LandingController: SKScene {
         addChild(landingAsset)
     }
     
-    /*
-    func addText(textName: String, name: String, fontName: String, fontSize: CGFloat, fontColor: UIColor, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let landingAsset = SKLabelNode(text: textName)
-        landingAsset.name = name
-        landingAsset.fontName = fontName
-        landingAsset.fontSize = fontSize
-        landingAsset.fontColor = fontColor
-        landingAsset.position = CGPoint(x: xPos, y: yPos)
-        landingAsset.zPosition = zPos
-        addChild(landingAsset)
+    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
+        let landingLabel = SKLabelNode(fontNamed: fontName)
+        landingLabel.name = name
+        landingLabel.text = text
+        landingLabel.fontSize = fontSize
+        landingLabel.fontColor = fontColor
+        landingLabel.horizontalAlignmentMode = xAlignment
+        landingLabel.position = CGPoint(x: xPos, y: yPos)
+        landingLabel.zPosition = zPos
+        addChild(landingLabel)
     }
-    */
 }
