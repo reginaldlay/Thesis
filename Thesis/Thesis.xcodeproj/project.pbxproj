@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390C3EF62A2F080C0025988C /* ConstructController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390C3EF52A2F080C0025988C /* ConstructController.swift */; };
 		395099412A2DA03500D35310 /* StageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395099402A2DA03500D35310 /* StageManager.swift */; };
 		39509EAD29F5665F008E3318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39509EAC29F5665F008E3318 /* AppDelegate.swift */; };
 		39509EAF29F5665F008E3318 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39509EAE29F5665F008E3318 /* GameScene.sks */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		390C3EF52A2F080C0025988C /* ConstructController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructController.swift; sourceTree = "<group>"; };
 		395099402A2DA03500D35310 /* StageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageManager.swift; sourceTree = "<group>"; };
 		39509EA929F5665F008E3318 /* Thesis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thesis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39509EAC29F5665F008E3318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				39509EB429F5665F008E3318 /* GameViewController.swift */,
+				390C3EF52A2F080C0025988C /* ConstructController.swift */,
 				39EDFF532A0B90180064FAB0 /* AchievementController.swift */,
 				39EDFF4B2A0B8FA60064FAB0 /* FinishController.swift */,
 				39509EB229F5665F008E3318 /* GameController.swift */,
@@ -229,6 +232,7 @@
 				39509EAD29F5665F008E3318 /* AppDelegate.swift in Sources */,
 				39EDFF402A0B8EE40064FAB0 /* LandingController.swift in Sources */,
 				395099412A2DA03500D35310 /* StageManager.swift in Sources */,
+				390C3EF62A2F080C0025988C /* ConstructController.swift in Sources */,
 				39EDFF562A0B90430064FAB0 /* SettingController.swift in Sources */,
 				39EDFF482A0B8F800064FAB0 /* StartingStageController.swift in Sources */,
 			);

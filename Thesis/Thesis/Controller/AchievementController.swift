@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class AchievementController: SKScene {
+class AchievementController: ConstructController {
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
@@ -37,27 +37,6 @@ class AchievementController: SKScene {
                 }
             }
         }
-    }
-    
-    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let achievementAsset = SKSpriteNode(imageNamed: imageName)
-        achievementAsset.name = name
-        achievementAsset.size = CGSize(width: widthSize, height: heightSize)
-        achievementAsset.position = CGPoint(x: xPos, y: yPos)
-        achievementAsset.zPosition = zPos
-        addChild(achievementAsset)
-    }
-    
-    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let achievementLabel = SKLabelNode(fontNamed: fontName)
-        achievementLabel.name = name
-        achievementLabel.text = text
-        achievementLabel.fontSize = fontSize
-        achievementLabel.fontColor = fontColor
-        achievementLabel.horizontalAlignmentMode = xAlignment
-        achievementLabel.position = CGPoint(x: xPos, y: yPos)
-        achievementLabel.zPosition = zPos
-        addChild(achievementLabel)
     }
     
 }

@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class FinishController: SKScene {
+class FinishController: ConstructController {
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
         addLabel(fontName: "Futura Medium", name: "label_finish_level", text: "Level 1 Clear", fontSize: 20, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 0, zPos: 0)
@@ -49,26 +49,5 @@ class FinishController: SKScene {
                 }
             }
         }
-    }
-    
-    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let finishAsset = SKSpriteNode(imageNamed: imageName)
-        finishAsset.name = name
-        finishAsset.size = CGSize(width: widthSize, height: heightSize)
-        finishAsset.position = CGPoint(x: xPos, y: yPos)
-        finishAsset.zPosition = zPos
-        addChild(finishAsset)
-    }
-    
-    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let finishLabel = SKLabelNode(fontNamed: fontName)
-        finishLabel.name = name
-        finishLabel.text = text
-        finishLabel.fontSize = fontSize
-        finishLabel.fontColor = fontColor
-        finishLabel.horizontalAlignmentMode = xAlignment
-        finishLabel.position = CGPoint(x: xPos, y: yPos)
-        finishLabel.zPosition = zPos
-        addChild(finishLabel)
     }
 }
