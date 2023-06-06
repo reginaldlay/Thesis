@@ -16,13 +16,6 @@ class GameController: ConstructController {
         addLabel(fontName: "Futura Medium", name: "label_ptc", text: "Press to continue...", fontSize: 25, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -310, zPos: 0)
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for touch in touches {
-//            let location = touch.location(in: self)
-//            let node = self.atPoint(location)
-//        }
-//    }
-    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
