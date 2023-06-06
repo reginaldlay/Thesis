@@ -12,14 +12,12 @@ class LandingController: ConstructController {
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
-        addImage(imageName: "background_header", name: "background_header", widthSize: 125, heightSize: 120, xPos: -132.5, yPos: 327.5, zPos: 0)
-        addImage(imageName: "background_subheader", name: "background_subheader", widthSize: 275, heightSize: 120, xPos: 57.5, yPos: 327.5, zPos: 0)
-        addImage(imageName: "button_landing", name: "button_start", widthSize: 200, heightSize: 120, xPos: 0, yPos: 100, zPos: 0)
-        addImage(imageName: "button_landing", name: "button_achievement", widthSize: 200, heightSize: 120, xPos: 0, yPos: -80, zPos: 0)
-        addImage(imageName: "button_landing", name: "button_setting", widthSize: 200, heightSize: 120, xPos: 0, yPos: -260, zPos: 0)
-        addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 36, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 90, zPos: 1)
-        addLabel(fontName: "Futura Medium", name: "label_achievement", text: "Achievement", fontSize: 27, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -85, zPos: 1)
-        addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 36, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -270, zPos: 1)
+        addImage(imageName: "button_landing", name: "button_start", widthSize: 200, heightSize: 120, xPos: 0, yPos: 180, zPos: 0)
+        addImage(imageName: "button_landing", name: "button_achievement", widthSize: 200, heightSize: 120, xPos: 0, yPos: 0, zPos: 0)
+        addImage(imageName: "button_landing", name: "button_setting", widthSize: 200, heightSize: 120, xPos: 0, yPos: -180, zPos: 0)
+        addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 170, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_achievement", text: "Achievement", fontSize: 27, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -5, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -190, zPos: 1)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
