@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class StageManager: SKScene {
+class StageManager: ConstructController {
     
     func arrangePuzzle(levelNumber: Int) {
         /*

@@ -51,25 +51,4 @@ class StageController: StageManager {
             
         }
     }
-    
-    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let stageAsset = SKSpriteNode(imageNamed: imageName)
-        stageAsset.name = name
-        stageAsset.size = CGSize(width: widthSize, height: heightSize)
-        stageAsset.position = CGPoint(x: xPos, y: yPos)
-        stageAsset.zPosition = zPos
-        addChild(stageAsset)
-    }
-    
-    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let stageLabel = SKLabelNode(fontNamed: fontName)
-        stageLabel.name = name
-        stageLabel.text = text
-        stageLabel.fontSize = fontSize
-        stageLabel.fontColor = fontColor
-        stageLabel.horizontalAlignmentMode = xAlignment
-        stageLabel.position = CGPoint(x: xPos, y: yPos)
-        stageLabel.zPosition = zPos
-        addChild(stageLabel)
-    }
 }

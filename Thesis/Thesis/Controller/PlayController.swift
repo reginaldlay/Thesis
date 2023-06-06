@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class PlayController: SKScene {
+class PlayController: ConstructController {
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
@@ -34,27 +34,6 @@ class PlayController: SKScene {
                 }
             }
         }
-    }
-    
-    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let playAsset = SKSpriteNode(imageNamed: imageName)
-        playAsset.name = name
-        playAsset.size = CGSize(width: widthSize, height: heightSize)
-        playAsset.position = CGPoint(x: xPos, y: yPos)
-        playAsset.zPosition = zPos
-        addChild(playAsset)
-    }
-    
-    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let playLabel = SKLabelNode(fontNamed: fontName)
-        playLabel.name = name
-        playLabel.text = text
-        playLabel.fontSize = fontSize
-        playLabel.fontColor = fontColor
-        playLabel.horizontalAlignmentMode = xAlignment
-        playLabel.position = CGPoint(x: xPos, y: yPos)
-        playLabel.zPosition = zPos
-        addChild(playLabel)
     }
     
 }

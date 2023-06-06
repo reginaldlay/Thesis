@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class LandingController: SKScene {
+class LandingController: ConstructController {
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
@@ -66,26 +66,5 @@ class LandingController: SKScene {
                 }
             }
         }
-    }
-    
-    func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let landingAsset = SKSpriteNode(imageNamed: imageName)
-        landingAsset.name = name
-        landingAsset.size = CGSize(width: widthSize, height: heightSize)
-        landingAsset.position = CGPoint(x: xPos, y: yPos)
-        landingAsset.zPosition = zPos
-        addChild(landingAsset)
-    }
-    
-    func addLabel(fontName: String, name: String, text: String, fontSize: CGFloat, fontColor: UIColor, xAlignment: SKLabelHorizontalAlignmentMode, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
-        let landingLabel = SKLabelNode(fontNamed: fontName)
-        landingLabel.name = name
-        landingLabel.text = text
-        landingLabel.fontSize = fontSize
-        landingLabel.fontColor = fontColor
-        landingLabel.horizontalAlignmentMode = xAlignment
-        landingLabel.position = CGPoint(x: xPos, y: yPos)
-        landingLabel.zPosition = zPos
-        addChild(landingLabel)
     }
 }
