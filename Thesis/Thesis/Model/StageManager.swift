@@ -10,7 +10,10 @@ import SpriteKit
 
 class StageManager: ConstructController {
     
-    func arrangePuzzle(levelNumber: Int) {
+    var stagePuzzleAssets: [SKSpriteNode] = []
+    var stagePuzzleCharacter: SKSpriteNode? = nil
+    
+    func arrangePuzzle(arrangingLevelNumber: Int) {
         /*
          
          245  [50]   [51]   [52]   [53]   [54]   [55]   [56]
@@ -24,23 +27,25 @@ class StageManager: ConstructController {
               -147   -98    -49     0      49     98    147
          */
         
-        switch levelNumber {
+        switch arrangingLevelNumber {
         case 1:
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss18", widthSize: 49, heightSize: 49, xPos: 0, yPos: 0, zPos: 0, rotatePuzzle: 2)
-            addPuzzle(puzzleName: "stage_shape_start", name: "ss19", widthSize: 49, heightSize: 49, xPos: 49, yPos: 0, zPos: 0, rotatePuzzle: 4)
-            addPuzzle(puzzleName: "stage_shape_long", name: "ss25", widthSize: 49, heightSize: 49, xPos: 0, yPos: 49, zPos: 0, rotatePuzzle: 1)
-            addPuzzle(puzzleName: "stage_shape_finish", name: "ss31", widthSize: 49, heightSize: 49, xPos: -49, yPos: 98, zPos: 0, rotatePuzzle: 4)
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss32", widthSize: 49, heightSize: 49, xPos: 0, yPos: 98, zPos: 0, rotatePuzzle: 1)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss18", xPos: 0, yPos: 0, rotatePuzzle: 2)
+            addPuzzle(puzzleName: "stage_shape_start", name: "ss19", xPos: 49, yPos: 0, rotatePuzzle: 4)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss25", xPos: 0, yPos: 49, rotatePuzzle: 1)
+            addPuzzle(puzzleName: "stage_shape_finish", name: "ss31", xPos: -49, yPos: 98, rotatePuzzle: 4)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss32", xPos: 0, yPos: 98, rotatePuzzle: 1)
+            addCharacter(xPos: 49, yPos: 0)
             
         case 2:
-            addPuzzle(puzzleName: "stage_shape_start", name: "ss10", widthSize: 49, heightSize: 49, xPos: -49, yPos: -49, zPos: 0, rotatePuzzle: 4)
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss17", widthSize: 49, heightSize: 49, xPos: -49, yPos: 0, zPos: 0, rotatePuzzle: 1)
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss16", widthSize: 49, heightSize: 49, xPos: -98, yPos: 0, zPos: 0, rotatePuzzle: 2)
-            addPuzzle(puzzleName: "stage_shape_long", name: "ss23", widthSize: 49, heightSize: 49, xPos: -98, yPos: 49, zPos: 0, rotatePuzzle: 3)
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss30", widthSize: 49, heightSize: 49, xPos: -98, yPos: 98, zPos: 0, rotatePuzzle: 4)
-            addPuzzle(puzzleName: "stage_shape_long", name: "ss31", widthSize: 49, heightSize: 49, xPos: -49, yPos: 98, zPos: 0, rotatePuzzle: 1)
-            addPuzzle(puzzleName: "stage_shape_long", name: "ss32", widthSize: 49, heightSize: 49, xPos: 0, yPos: 98, zPos: 0, rotatePuzzle: 2)
-            addPuzzle(puzzleName: "stage_shape_finish", name: "ss33", widthSize: 49, heightSize: 49, xPos: 49, yPos: 98, zPos: 0, rotatePuzzle: 4)
+            addPuzzle(puzzleName: "stage_shape_start", name: "ss10", xPos: -49, yPos: -49, rotatePuzzle: 4)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss17", xPos: -49, yPos: 0, rotatePuzzle: 1)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss16", xPos: -98, yPos: 0, rotatePuzzle: 2)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss23", xPos: -98, yPos: 49, rotatePuzzle: 3)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss30", xPos: -98, yPos: 98, rotatePuzzle: 4)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss31", xPos: -49, yPos: 98, rotatePuzzle: 1)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss32", xPos: 0, yPos: 98, rotatePuzzle: 2)
+            addPuzzle(puzzleName: "stage_shape_finish", name: "ss33", xPos: 49, yPos: 98, rotatePuzzle: 4)
+            addCharacter(xPos: -49, yPos: -49)
             
         default:
             break
@@ -48,12 +53,12 @@ class StageManager: ConstructController {
         
     }
     
-    func addPuzzle(puzzleName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat, rotatePuzzle: Int) {
+    func addPuzzle(puzzleName: String, name: String, xPos: CGFloat, yPos: CGFloat, rotatePuzzle: Int) {
         let stagePuzzleAsset = SKSpriteNode(imageNamed: puzzleName)
         stagePuzzleAsset.name = name
-        stagePuzzleAsset.size = CGSize(width: widthSize, height: heightSize)
+        stagePuzzleAsset.size = CGSize(width: 49, height: 49)
         stagePuzzleAsset.position = CGPoint(x: xPos, y: yPos)
-        stagePuzzleAsset.zPosition = zPos
+        stagePuzzleAsset.zPosition = 0
         
         //1 = 90, 2 = 180, 3 = 270, 4 = 360
         let rotationAction = SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.5)
@@ -62,6 +67,22 @@ class StageManager: ConstructController {
         }
         
         addChild(stagePuzzleAsset)
+        stagePuzzleAssets.append(stagePuzzleAsset)
+    }
+    
+    func addCharacter(xPos: CGFloat, yPos: CGFloat) {
+        stagePuzzleCharacter = SKSpriteNode(imageNamed: "stage_character")
+        stagePuzzleCharacter?.name = "stage_character"
+        stagePuzzleCharacter?.size = CGSize(width: 27, height: 27)
+        stagePuzzleCharacter?.position = CGPoint(x: xPos, y: yPos)
+        stagePuzzleCharacter?.zPosition = 1
+        
+        if let puzzleCharacter = stagePuzzleCharacter {
+            addChild(puzzleCharacter)
+        }
+        else {
+            print("nil")
+        }
     }
     
 }
