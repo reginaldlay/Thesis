@@ -10,8 +10,24 @@ import GameplayKit
 
 class StageController: StageManager {
     
-    var newCharacterX: CGFloat = 0.0
-    var newCharacterY: CGFloat = 0.0
+    var newCharacterX: CGFloat {
+        get {
+            return getCharacterPositionX()
+        }
+        set {
+            stagePuzzleCharacter?.position.x = newValue
+        }
+    }
+    var newCharacterY: CGFloat {
+        get {
+            return getCharacterPositionY()
+        }
+        set {
+            stagePuzzleCharacter?.position.y = newValue
+        }
+    }
+    
+    var characterTouchBorder: Bool = false
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
@@ -23,7 +39,6 @@ class StageController: StageManager {
         addImage(imageName: "button_move_down", name: "button_move_down", widthSize: 60, heightSize: 60, xPos: 0, yPos: -345, zPos: 0)
         
         arrangePuzzle(arrangingLevelNumber: 1)
-        print(stagePuzzleCharacter?.position)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -42,73 +57,131 @@ class StageController: StageManager {
             }
             
             if (node.name == "button_move_up") {
-                newCharacterY = (currentCharacterY ?? .zero) + 49.0
-                let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
-                stagePuzzleCharacter?.run(moveCharacter)
+                if !characterTouchBorder {
+                    newCharacterY = (currentCharacterY ?? .zero) + 49.0
+                    
+                    checkBorderLevel()
+                    
+                    if characterTouchBorder {
+                        print("if: \(newCharacterY)")
+                        newCharacterY = newCharacterY - 49
+                        print("new if: \(newCharacterY)")
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                        print("else: \(newCharacterY)")
+                    }
+                }
+                characterTouchBorder = false
                 
-                if newCharacterX == -49 && newCharacterY == 98 {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("menangg")
-                }
-                else {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("nooo")
-                }
+                checkWinCondition(checkingLevelNumber: 1)
             }
             else if (node.name == "button_move_left") {
-                newCharacterX = (currentCharacterX ?? .zero) - 49.0
-                let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
-                stagePuzzleCharacter?.run(moveCharacter)
+                if !characterTouchBorder {
+                    newCharacterX = (currentCharacterX ?? .zero) - 49.0
+                    
+                    checkBorderLevel()
+                    
+                    if characterTouchBorder {
+                        print("if: \(newCharacterX)")
+                        newCharacterX = newCharacterX + 49
+                        print("new if: \(newCharacterX)")
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                        print("else: \(newCharacterX)")
+                    }
+                }
+                characterTouchBorder = false
                 
-                if newCharacterX == -49 && newCharacterY == 98 {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("menangg")
-                }
-                else {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("nooo")
-                }
+                checkWinCondition(checkingLevelNumber: 1)
             }
             else if (node.name == "button_pause") {
                 //
             }
             else if (node.name == "button_move_right") {
-                newCharacterX = (currentCharacterX ?? .zero) + 49.0
-                let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
-                stagePuzzleCharacter?.run(moveCharacter)
+                if !characterTouchBorder {
+                    newCharacterX = (currentCharacterX ?? .zero) + 49.0
+                    
+                    checkBorderLevel()
+                    
+                    if characterTouchBorder {
+                        print("if: \(newCharacterX)")
+                        newCharacterX = newCharacterX - 49
+                        print("new if: \(newCharacterX)")
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                        print("else: \(newCharacterX)")
+                    }
+                }
+                characterTouchBorder = false
                 
-                if newCharacterX == -49 && newCharacterY == 98 {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("menangg")
-                }
-                else {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("nooo")
-                }
+                checkWinCondition(checkingLevelNumber: 1)
             }
             else if (node.name == "button_move_down") {
-                newCharacterY = (currentCharacterY ?? .zero) - 49.0
-                let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
-                stagePuzzleCharacter?.run(moveCharacter)
+                if !characterTouchBorder {
+                    newCharacterY = (currentCharacterY ?? .zero) - 49.0
+                    
+                    checkBorderLevel()
+                    
+                    if characterTouchBorder {
+                        print("if: \(newCharacterY)")
+                        newCharacterY = newCharacterY + 49
+                        print("new if: \(newCharacterY)")
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                        print("else: \(newCharacterY)")
+                    }
+                }
+                characterTouchBorder = false
                 
-                if newCharacterX == -49 && newCharacterY == 98 {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("menangg")
-                }
-                else {
-                    print(newCharacterX)
-                    print(newCharacterY)
-                    print("nooo")
-                }
+                checkWinCondition(checkingLevelNumber: 1)
             }
             
         }
     }
+    
+    func checkBorderLevel() {
+        for index in 1...stagePuzzleAssets.count {
+            if newCharacterX == stagePuzzleAssets[index-1].position.x && newCharacterY == stagePuzzleAssets[index-1].position.y {
+                characterTouchBorder = false
+                print("FALSE")
+                break
+            }
+            else {
+                characterTouchBorder = true
+                print("TRUE")
+            }
+        }
+    }
+    
+    func checkWinCondition(checkingLevelNumber: Int) {
+        switch checkingLevelNumber {
+        case 1:
+            if newCharacterX == -49 && newCharacterY == 98 {
+                print("menanggg")
+            }
+            else {
+                print("no menangg")
+            }
+            
+        case 2:
+            if newCharacterX == 49 && newCharacterY == 98 {
+                print("menanggg")
+            }
+            else {
+                print("nooo")
+            }
+            
+        default:
+            break
+        }
+    }
+    
 }

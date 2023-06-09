@@ -13,6 +13,14 @@ class StageManager: ConstructController {
     var stagePuzzleAssets: [SKSpriteNode] = []
     var stagePuzzleCharacter: SKSpriteNode? = nil
     
+    func getCharacterPositionX() -> CGFloat {
+        return stagePuzzleCharacter?.position.x ?? .zero
+    }
+    
+    func getCharacterPositionY() -> CGFloat {
+        return stagePuzzleCharacter?.position.y ?? .zero
+    }
+    
     func arrangePuzzle(arrangingLevelNumber: Int) {
         /*
          
@@ -38,8 +46,8 @@ class StageManager: ConstructController {
             
         case 2:
             addPuzzle(puzzleName: "stage_shape_start", name: "ss10", xPos: -49, yPos: -49, rotatePuzzle: 4)
-            addPuzzle(puzzleName: "stage_shape_l", name: "ss17", xPos: -49, yPos: 0, rotatePuzzle: 1)
             addPuzzle(puzzleName: "stage_shape_l", name: "ss16", xPos: -98, yPos: 0, rotatePuzzle: 2)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss17", xPos: -49, yPos: 0, rotatePuzzle: 1)
             addPuzzle(puzzleName: "stage_shape_long", name: "ss23", xPos: -98, yPos: 49, rotatePuzzle: 3)
             addPuzzle(puzzleName: "stage_shape_l", name: "ss30", xPos: -98, yPos: 98, rotatePuzzle: 4)
             addPuzzle(puzzleName: "stage_shape_long", name: "ss31", xPos: -49, yPos: 98, rotatePuzzle: 1)
