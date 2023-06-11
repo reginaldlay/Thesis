@@ -28,6 +28,7 @@ class StageController: StageManager {
     }
     
     var characterTouchBorder: Bool = false
+    var currentLevel: Int = 1
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
@@ -40,7 +41,10 @@ class StageController: StageManager {
         
         arrangePuzzle(arrangingLevelNumber: 1)
     }
-    
+}
+
+//touches
+extension StageController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -53,50 +57,49 @@ class StageController: StageManager {
                 if node.name == "ss\(index)" {
                     let rotationAction = SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.3)
                     node.run(rotationAction)
+                    
+                    let desiredName = node.name ?? ""
+                    
+                    checkPassable(levelNumber: 1, exceptionalName: desiredName)
+
                 }
             }
             
             if (node.name == "button_move_up") {
                 if !characterTouchBorder {
                     newCharacterY = (currentCharacterY ?? .zero) + 49.0
-                    
-                    checkBorderLevel()
+
+                    checkBorder()
                     
                     if characterTouchBorder {
-                        print("if: \(newCharacterY)")
                         newCharacterY = newCharacterY - 49
-                        print("new if: \(newCharacterY)")
                     }
                     else {
                         let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
                         stagePuzzleCharacter?.run(moveCharacter)
-                        print("else: \(newCharacterY)")
                     }
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingLevelNumber: 1)
+                checkWinCondition(checkingWinLevelNumber: 1)
             }
             else if (node.name == "button_move_left") {
                 if !characterTouchBorder {
                     newCharacterX = (currentCharacterX ?? .zero) - 49.0
                     
-                    checkBorderLevel()
+                    checkBorder()
                     
                     if characterTouchBorder {
-                        print("if: \(newCharacterX)")
                         newCharacterX = newCharacterX + 49
-                        print("new if: \(newCharacterX)")
                     }
                     else {
                         let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
                         stagePuzzleCharacter?.run(moveCharacter)
-                        print("else: \(newCharacterX)")
                     }
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingLevelNumber: 1)
+                checkWinCondition(checkingWinLevelNumber: 1)
             }
             else if (node.name == "button_pause") {
                 //
@@ -105,64 +108,59 @@ class StageController: StageManager {
                 if !characterTouchBorder {
                     newCharacterX = (currentCharacterX ?? .zero) + 49.0
                     
-                    checkBorderLevel()
+                    checkBorder()
                     
                     if characterTouchBorder {
-                        print("if: \(newCharacterX)")
                         newCharacterX = newCharacterX - 49
-                        print("new if: \(newCharacterX)")
                     }
                     else {
                         let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
                         stagePuzzleCharacter?.run(moveCharacter)
-                        print("else: \(newCharacterX)")
                     }
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingLevelNumber: 1)
+                checkWinCondition(checkingWinLevelNumber: 1)
             }
             else if (node.name == "button_move_down") {
                 if !characterTouchBorder {
                     newCharacterY = (currentCharacterY ?? .zero) - 49.0
                     
-                    checkBorderLevel()
+                    checkBorder()
                     
                     if characterTouchBorder {
-                        print("if: \(newCharacterY)")
                         newCharacterY = newCharacterY + 49
-                        print("new if: \(newCharacterY)")
                     }
                     else {
                         let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
                         stagePuzzleCharacter?.run(moveCharacter)
-                        print("else: \(newCharacterY)")
                     }
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingLevelNumber: 1)
+                checkWinCondition(checkingWinLevelNumber: 1)
             }
             
         }
     }
-    
-    func checkBorderLevel() {
+}
+
+//functions
+extension StageController {
+    func checkBorder() {
         for index in 1...stagePuzzleAssets.count {
-            if newCharacterX == stagePuzzleAssets[index-1].position.x && newCharacterY == stagePuzzleAssets[index-1].position.y {
+            if newCharacterX == stagePuzzleAssets[index-1].puzzleAsset.position.x && newCharacterY == stagePuzzleAssets[index-1].puzzleAsset.position.y {
                 characterTouchBorder = false
-                print("FALSE")
                 break
             }
             else {
                 characterTouchBorder = true
-                print("TRUE")
             }
         }
     }
     
-    func checkWinCondition(checkingLevelNumber: Int) {
-        switch checkingLevelNumber {
+    func checkWinCondition(checkingWinLevelNumber: Int) {
+        switch checkingWinLevelNumber {
         case 1:
             if newCharacterX == -49 && newCharacterY == 98 {
                 print("menanggg")
@@ -184,4 +182,72 @@ class StageController: StageManager {
         }
     }
     
+    func checkPassable(levelNumber: Int, exceptionalName: String) {
+        if let puzzleIndex = stagePuzzleAssets.firstIndex(where: { $0.puzzleAsset.name == exceptionalName }) {
+            stagePuzzleAssets[puzzleIndex].puzzleDirection += 1
+                
+            if stagePuzzleAssets[puzzleIndex].puzzleDirection > 4 {
+                stagePuzzleAssets[puzzleIndex].puzzleDirection = 1
+            }
+            
+            switch levelNumber {
+            case 1:
+                if exceptionalName == "ss25" {
+                    if stagePuzzleAssets[puzzleIndex].puzzleDirection % 2 == 0 {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = true
+                        print("if if: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                    else {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = false
+                        print("if else: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                }
+                else {
+                    if stagePuzzleAssets[puzzleIndex].puzzleDirection == stagePuzzleAssets[puzzleIndex].puzzleTrueDirection {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = true
+                        print("else if: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                    else {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = false
+                        print("else else: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                }
+                
+            case 2:
+                if exceptionalName == "ss23" {
+                    if stagePuzzleAssets[puzzleIndex].puzzleDirection % 2 == 0 {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = true
+                        print("if if 1: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                    else {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = false
+                        print("if else 1: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                }
+                else if exceptionalName == "ss31" || exceptionalName == "ss32" {
+                    if stagePuzzleAssets[puzzleIndex].puzzleDirection == 1 || stagePuzzleAssets[puzzleIndex].puzzleDirection == 3 {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = true
+                        print("if if 2: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                    else {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = false
+                        print("if else 2: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                }
+                else {
+                    if stagePuzzleAssets[puzzleIndex].puzzleDirection == stagePuzzleAssets[puzzleIndex].puzzleTrueDirection {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = true
+                        print("else if: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                    else {
+                        stagePuzzleAssets[puzzleIndex].puzzleBoolDirection = false
+                        print("else else: \(stagePuzzleAssets[puzzleIndex].puzzleBoolDirection)")
+                    }
+                }
+                
+            default:
+                break
+            }
+        }
+    }
 }
