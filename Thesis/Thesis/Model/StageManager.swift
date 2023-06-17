@@ -21,7 +21,7 @@ class StageManager: ConstructController {
         return stagePuzzleCharacter?.position.y ?? .zero
     }
     
-    func arrangePuzzle(arrangingLevelNumber: Int) {
+    func arrangePuzzle(arrangingLevelNumber: Int32) {
         /*
          
          245  [50]   [51]   [52]   [53]   [54]   [55]   [56]
@@ -36,7 +36,7 @@ class StageManager: ConstructController {
          */
         
         switch arrangingLevelNumber {
-        case 1:
+        case 0:
             addPuzzle(puzzleName: "stage_shape_l", name: "ss18", xPos: 0, yPos: 0, rotatePuzzle: 2, trueDirection: 4, boolDirection: false)
             addPuzzle(puzzleName: "stage_shape_start", name: "ss19", xPos: 49, yPos: 0, rotatePuzzle: 4, trueDirection: 4, boolDirection: true)
             addPuzzle(puzzleName: "stage_shape_long", name: "ss25", xPos: 0, yPos: 49, rotatePuzzle: 1, trueDirection: 2, boolDirection: false)
@@ -44,7 +44,7 @@ class StageManager: ConstructController {
             addPuzzle(puzzleName: "stage_shape_l", name: "ss32", xPos: 0, yPos: 98, rotatePuzzle: 1, trueDirection: 2, boolDirection: false)
             addCharacter(xPos: 49, yPos: 0)
             
-        case 2:
+        case 1:
             addPuzzle(puzzleName: "stage_shape_start", name: "ss10", xPos: -49, yPos: -49, rotatePuzzle: 4, trueDirection: 4, boolDirection: true)
             addPuzzle(puzzleName: "stage_shape_l", name: "ss16", xPos: -98, yPos: 0, rotatePuzzle: 2, trueDirection: 4, boolDirection: false)
             addPuzzle(puzzleName: "stage_shape_l", name: "ss17", xPos: -49, yPos: 0, rotatePuzzle: 1, trueDirection: 2, boolDirection: false)
