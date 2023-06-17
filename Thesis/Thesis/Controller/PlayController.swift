@@ -10,15 +10,20 @@ import GameplayKit
 
 class PlayController: ConstructController {
     
+    var currentLevel = CoreDataManager.shared.readData().currentLevel
+    
     override func didMove(to view: SKView) {
+//        CoreDataManager.shared.deleteData()
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
         addImage(imageName: "button_back", name: "button_back", widthSize: 55, heightSize: 50, xPos: -140, yPos: 320, zPos: 0)
-        addImage(imageName: "background_level_number", name: "background_level_number", widthSize: 200, heightSize: 120, xPos: 0, yPos: 0, zPos: 0)
-        addImage(imageName: "button_previous", name: "button_previous", widthSize: 48, heightSize: 48, xPos: -135, yPos: 0, zPos: 0)
-        addImage(imageName: "button_next", name: "button_next", widthSize: 48, heightSize: 48, xPos: 135, yPos: 0, zPos: 0)
-        addLabel(fontName: "Futura Medium", name: "level_name", text: "Level 1", fontSize: 25, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -6, zPos: 1)
         addLabel(fontName: "Futura Medium", name: "level_choose", text: "Choose your level!", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 124, zPos: 0)
-    }
+        addImage(imageName: "button_previous", name: "button_previous", widthSize: 48, heightSize: 48, xPos: -135, yPos: 0, zPos: 0)
+        addImage(imageName: "background_level_number", name: "background_level_number", widthSize: 200, heightSize: 120, xPos: 0, yPos: 0, zPos: 0)
+        addLabel(fontName: "Futura Medium", name: "level_name", text: "Level \(currentLevel+1)", fontSize: 25, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -6, zPos: 1)
+        addImage(imageName: "button_next", name: "button_next", widthSize: 48, heightSize: 48, xPos: 135, yPos: 0, zPos: 0)
+        
+        checkVisibleButton()
+    }   
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -31,7 +36,56 @@ class PlayController: ConstructController {
                     self.scene?.view?.presentScene(nextScene)
                 }
             }
+            else if (node.name == "background_level_number" || node.name == "level_name") {
+                if let nextScene = SKScene(fileNamed: "StartingStageScene") {
+                    self.scene?.scaleMode = .aspectFill
+                    self.scene?.view?.presentScene(nextScene, transition: SKTransition.fade(withDuration: 4))
+                }
+            }
+            else if (node.name == "button_previous") {
+                currentLevel -= 1
+                
+                changeLevelName()
+                checkVisibleButton()
+            }
+            else if (node.name == "button_next") {
+                currentLevel += 1
+                
+                changeLevelName()
+                checkVisibleButton()
+            }
         }
+    }
+    
+}
+
+//functions
+extension PlayController {
+    
+    func checkVisibleButton() {
+        if CoreDataManager.shared.readData().currentLevel == 0 {
+            childNode(withName: "button_previous")?.isHidden = true
+            childNode(withName: "button_next")?.isHidden = true
+        }
+        else {
+            if currentLevel == 0 {
+                childNode(withName: "button_previous")?.isHidden = true
+                childNode(withName: "button_next")?.isHidden = false
+            }
+            else if currentLevel == CoreDataManager.shared.readData().currentLevel {
+                childNode(withName: "button_previous")?.isHidden = false
+                childNode(withName: "button_next")?.isHidden = true
+            }
+            else {
+                childNode(withName: "button_previous")?.isHidden = false
+                childNode(withName: "button_next")?.isHidden = false
+            }
+        }
+    }
+    
+    func changeLevelName() {
+        childNode(withName: "level_name")?.removeFromParent()
+        addLabel(fontName: "Futura Medium", name: "level_name", text: "Level \(currentLevel+1)", fontSize: 25, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -6, zPos: 1)
     }
     
 }
