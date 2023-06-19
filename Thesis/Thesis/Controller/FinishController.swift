@@ -20,8 +20,7 @@ class FinishController: ConstructController {
         addLabel(fontName: "Futura Medium", name: "label_back_to_menu", text: "Back to Menu", fontSize: 18, fontColor: .black, xAlignment: .center, xPos: -85, yPos: -242, zPos: 1)
         addLabel(fontName: "Futura Medium", name: "label_next_level", text: "Next Level", fontSize: 18, fontColor: .black, xAlignment: .center, xPos: 85, yPos: -242, zPos: 1)
         
-        print("playerCurrentLevel after2 = \(CoreDataManager.shared.playerCurrentLevel)")
-        print("currentLevel after2 = \(CoreDataManager.shared.readData().currentLevel)")
+        setUpSFXButton()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,15 +29,27 @@ class FinishController: ConstructController {
             let node = self.atPoint(location)
             
             if (node.name == "button_back_to_menu" || node.name == "label_back_to_menu") {
-                if let nextScene = SKScene(fileNamed: "PlayScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "PlayScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
                 }
             }
             else if (node.name == "button_next_level" || node.name == "label_next_level") {
-                if let nextScene = SKScene(fileNamed: "StartingStageScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene, transition: SKTransition.fade(withDuration: 4))
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "StartingStageScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene, transition: SKTransition.fade(withDuration: 4))
+                    }
                 }
             }
         }

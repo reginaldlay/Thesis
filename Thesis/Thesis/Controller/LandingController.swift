@@ -18,6 +18,8 @@ class LandingController: ConstructController {
         addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 170, zPos: 1)
         addLabel(fontName: "Futura Medium", name: "label_achievement", text: "Achievement", fontSize: 27, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -5, zPos: 1)
         addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -190, zPos: 1)
+        
+        setUpSFXButton()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -25,42 +27,40 @@ class LandingController: ConstructController {
             let location = touch.location(in: self)
             let node = self.atPoint(location)
             
-            if (node.name == "button_start") {
-                if let nextScene = SKScene(fileNamed: "PlayScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+            if (node.name == "button_start" || node.name == "label_start") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "PlayScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
                 }
             }
-            else if (node.name == "label_start") {
-                if let nextScene = SKScene(fileNamed: "PlayScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+            else if (node.name == "button_achievement" || node.name == "label_achievement") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "AchievementScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
                 }
             }
-            
-            else if (node.name == "button_achievement") {
-                if let nextScene = SKScene(fileNamed: "AchievementScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+            else if (node.name == "button_setting" || node.name == "label_setting") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
                 }
-            }
-            else if (node.name == "label_achievement") {
-                if let nextScene = SKScene(fileNamed: "AchievementScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
-                }
-            }
-            
-            else if (node.name == "button_setting") {
-                if let nextScene = SKScene(fileNamed: "SettingScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
-                }
-            }
-            else if (node.name == "label_setting") {
-                if let nextScene = SKScene(fileNamed: "SettingScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "SettingScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
                 }
             }
         }

@@ -22,7 +22,6 @@ class StartingStageController: ConstructController {
                 self.scene?.view?.presentScene(nextScene, transition: SKTransition.fade(withDuration: 4))
             }
         }
-        
     }
     
 }

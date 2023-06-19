@@ -11,11 +11,16 @@ import GameplayKit
 class GameController: ConstructController {
     
     override func didMove(to view: SKView) {
+//        CoreDataManager.shared.deleteData()
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
         addImage(imageName: "logo", name: "logo", widthSize: 300, heightSize: 300, xPos: 0, yPos: 0, zPos: 0)
         addLabel(fontName: "Futura Medium", name: "label_ptc", text: "Press to continue...", fontSize: 25, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -310, zPos: 0)
         
-        print("testt")
+        setUpSFXButton()
+        
+        if CoreDataManager.shared.playerCurrentBGM == true {
+            AudioManager.shared.playBGM()
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -24,15 +29,16 @@ class GameController: ConstructController {
             let node = self.atPoint(location)
             
             if (node.name == "background_base" || node.name == "logo" || node.name == "label_ptc") {
-                if let nextScene = SKScene(fileNamed: "LandingScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
+                soundSFXButton?.play()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "LandingScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
                 }
             }
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
 }
