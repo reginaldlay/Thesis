@@ -30,14 +30,6 @@ class StageController: StageManager {
     var characterTouchBorder: Bool = false
     var currentLevel = CoreDataManager.shared.playerCurrentLevel
     
-    //pause pop up
-    let rectangle = SKShapeNode(rectOf: CGSize(width: 390, height: 844))
-    let closeButton = SKSpriteNode(imageNamed: "button_close")
-    let settingButton = SKSpriteNode(imageNamed: "button_stage_pause")
-    let settingLabel = SKLabelNode(fontNamed: "Futura Medium")
-    let menuButton = SKSpriteNode(imageNamed: "button_stage_pause")
-    let menuLabel = SKLabelNode(fontNamed: "Futura Medium")
-    
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
         addLabel(fontName: "Futura Medium", name: "label_title", text: "Level \(currentLevel+1)", fontSize: 24, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 340, zPos: 0)
@@ -48,6 +40,9 @@ class StageController: StageManager {
         addImage(imageName: "button_move_down", name: "button_move_down", widthSize: 60, heightSize: 60, xPos: 0, yPos: -345, zPos: 0)
         
         arrangePuzzle(arrangingLevelNumber: currentLevel)
+        
+        setUpSFXButton()
+        setUpSFXStage()
     }
 }
 
@@ -63,16 +58,25 @@ extension StageController {
             
             for index in 1...56 {
                 if node.name == "ss\(index)" {
-                    let rotationAction = SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.3)
-                    node.run(rotationAction)
+                    if CoreDataManager.shared.playerCurrentSFX == true {
+                        soundSFXStage?.play()
+                    }
                     
-//                    let desiredName = node.name ?? ""
-//                    checkPassable(levelNumber: currentLevel, exceptionalName: desiredName)
-
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        let rotationAction = SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.3)
+                        node.run(rotationAction)
+                        
+    //                    let desiredName = node.name ?? ""
+    //                    checkPassable(levelNumber: currentLevel, exceptionalName: desiredName)
+                    }
                 }
             }
             
             if (node.name == "button_move_up") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXStage?.play()
+                }
+                
                 if !characterTouchBorder {
                     newCharacterY = (currentCharacterY ?? .zero) + 49.0
 
@@ -91,6 +95,10 @@ extension StageController {
                 checkWinCondition(checkingWinLevelNumber: currentLevel)
             }
             else if (node.name == "button_move_left") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXStage?.play()
+                }
+                
                 if !characterTouchBorder {
                     newCharacterX = (currentCharacterX ?? .zero) - 49.0
                     
@@ -108,25 +116,93 @@ extension StageController {
                 
                 checkWinCondition(checkingWinLevelNumber: currentLevel)
             }
+            
             else if (node.name == "button_pause") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
                 makePausePopUp()
             }
-            else if (node.name == "button_setting" || node.name == "label_setting") {
-                if let nextScene = SKScene(fileNamed: "SettingScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
-                }
-            }
-            else if (node.name == "button_menu" || node.name == "label_menu") {
-                if let nextScene = SKScene(fileNamed: "PlayScene") {
-                    self.scene?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(nextScene)
-                }
-            }
             else if (node.name == "button_close") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
                 deletePausePopUp()
             }
+            else if (node.name == "button_setting" || node.name == "label_setting") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                makeSettingPopUp()
+                deletePausePopUp()
+            }
+            else if (node.name == "button_menu" || node.name == "label_menu") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    if let nextScene = SKScene(fileNamed: "PlayScene") {
+                        self.scene?.scaleMode = .aspectFill
+                        self.scene?.view?.presentScene(nextScene)
+                    }
+                }
+            }
+            else if (node.name == "button_back") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                deleteSettingPopUp()
+                makePausePopUp()
+            }
+            else if (node.name == "button_bgm" || node.name == "label_bgm") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXButton?.play()
+                }
+                
+                if CoreDataManager.shared.playerCurrentBGM == true {
+                    AudioManager.shared.stopBGM()
+                    
+                    bgmLabel.text = "BGM: OFF"
+                    
+                    CoreDataManager.shared.playerCurrentBGM = false
+                    CoreDataManager.shared.updateData()
+                }
+                else {
+                    AudioManager.shared.playBGM()
+                    
+                    bgmLabel.text = "BGM: ON"
+                    
+                    CoreDataManager.shared.playerCurrentBGM = true
+                    CoreDataManager.shared.updateData()
+                }
+            }
+            else if (node.name == "button_sfx" || node.name == "label_sfx") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    sfxLabel.text = "SFX: OFF"
+                    
+                    CoreDataManager.shared.playerCurrentSFX = false
+                    CoreDataManager.shared.updateData()
+                }
+                else {
+                    soundSFXButton?.play()
+                    
+                    sfxLabel.text = "SFX: ON"
+                    
+                    CoreDataManager.shared.playerCurrentSFX = true
+                    CoreDataManager.shared.updateData()
+                }
+            }
+            
             else if (node.name == "button_move_right") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXStage?.play()
+                }
+                
                 if !characterTouchBorder {
                     newCharacterX = (currentCharacterX ?? .zero) + 49.0
                     
@@ -145,6 +221,10 @@ extension StageController {
                 checkWinCondition(checkingWinLevelNumber: currentLevel)
             }
             else if (node.name == "button_move_down") {
+                if CoreDataManager.shared.playerCurrentSFX == true {
+                    soundSFXStage?.play()
+                }
+                
                 if !characterTouchBorder {
                     newCharacterY = (currentCharacterY ?? .zero) - 49.0
                     
@@ -169,58 +249,6 @@ extension StageController {
 
 //functions
 extension StageController {
-    
-    func makePausePopUp() {
-        rectangle.position = CGPoint(x: 0, y: 0)
-        rectangle.zPosition = 2
-        rectangle.fillColor = UIColor.gray.withAlphaComponent(0.7)
-        addChild(rectangle)
-        
-        closeButton.name = "button_close"
-        closeButton.size = CGSize(width: 50, height: 50)
-        closeButton.position = CGPoint(x: -140, y: 320)
-        closeButton.zPosition = 3
-        addChild(closeButton)
-        
-        settingButton.name = "button_setting"
-        settingButton.size = CGSize(width: 200, height: 120)
-        settingButton.position = CGPoint(x: 0, y: 100)
-        settingButton.zPosition = 3
-        addChild(settingButton)
-        
-        settingLabel.name = "label_setting"
-        settingLabel.text = "Setting"
-        settingLabel.fontSize = 30
-        settingLabel.fontColor = .black
-        settingLabel.horizontalAlignmentMode = .center
-        settingLabel.position = CGPoint(x: 0, y: 94)
-        settingLabel.zPosition = 4
-        addChild(settingLabel)
-        
-        menuButton.name = "button_menu"
-        menuButton.size = CGSize(width: 200, height: 120)
-        menuButton.position = CGPoint(x: 0, y: -101)
-        menuButton.zPosition = 3
-        addChild(menuButton)
-        
-        menuLabel.name = "label_menu"
-        menuLabel.text = "Back to Menu"
-        menuLabel.fontSize = 26
-        menuLabel.fontColor = .black
-        menuLabel.horizontalAlignmentMode = .center
-        menuLabel.position = CGPoint(x: 0, y: -105)
-        menuLabel.zPosition = 4
-        addChild(menuLabel)
-    }
-    
-    func deletePausePopUp() {
-        rectangle.removeFromParent()
-        closeButton.removeFromParent()
-        menuButton.removeFromParent()
-        menuLabel.removeFromParent()
-        settingButton.removeFromParent()
-        settingLabel.removeFromParent()
-    }
     
     func moveToFinishScene() {
         CoreDataManager.shared.playerCurrentLevel = currentLevel + 1
