@@ -10,11 +10,9 @@ import GameplayKit
 
 class FinishController: ConstructController {
     
-    var currentLevel = CoreDataManager.shared.playerCurrentLevel
-    
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
-        addLabel(fontName: "Futura Medium", name: "label_finish_level", text: "Level \(currentLevel) Clear", fontSize: 20, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 0, zPos: 0)
+        addLabel(fontName: "Futura Medium", name: "label_finish_level", text: "Level \(CoreDataManager.shared.playerChosenLevel+1) Clear", fontSize: 20, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 0, zPos: 0)
         addImage(imageName: "button_back_to_menu", name: "button_back_to_menu", widthSize: 150, heightSize: 75, xPos: -85, yPos: -240, zPos: 0)
         addImage(imageName: "button_next_level", name: "button_next_level", widthSize: 150, heightSize: 75, xPos: 85, yPos: -240, zPos: 0)
         addLabel(fontName: "Futura Medium", name: "label_back_to_menu", text: "Back to Menu", fontSize: 18, fontColor: .black, xAlignment: .center, xPos: -85, yPos: -242, zPos: 1)
@@ -29,9 +27,11 @@ class FinishController: ConstructController {
             let node = self.atPoint(location)
             
             if (node.name == "button_back_to_menu" || node.name == "label_back_to_menu") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
+                
+                CoreDataManager.shared.playerChosenLevel += 1
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     if let nextScene = SKScene(fileNamed: "PlayScene") {
@@ -41,9 +41,11 @@ class FinishController: ConstructController {
                 }
             }
             else if (node.name == "button_next_level" || node.name == "label_next_level") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
+                
+                CoreDataManager.shared.playerChosenLevel += 1
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     if let nextScene = SKScene(fileNamed: "StartingStageScene") {

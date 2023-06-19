@@ -28,18 +28,18 @@ class StageController: StageManager {
     }
     
     var characterTouchBorder: Bool = false
-    var currentLevel = CoreDataManager.shared.playerCurrentLevel
+    var chosenLevel = CoreDataManager.shared.playerChosenLevel
     
     override func didMove(to view: SKView) {
         addImage(imageName: "background_base", name: "background_base", widthSize: 390, heightSize: 844, xPos: 0, yPos: 0, zPos: -1)
-        addLabel(fontName: "Futura Medium", name: "label_title", text: "Level \(currentLevel+1)", fontSize: 24, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 340, zPos: 0)
+        addLabel(fontName: "Futura Medium", name: "label_title", text: "Level \(chosenLevel+1)", fontSize: 24, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 340, zPos: 0)
         addImage(imageName: "button_move_up", name: "button_move_up", widthSize: 60, heightSize: 60, xPos: 0, yPos: -220, zPos: 0)
         addImage(imageName: "button_move_left", name: "button_move_left", widthSize: 60, heightSize: 60, xPos: -60, yPos: -280, zPos: 0)
         addImage(imageName: "button_pause", name: "button_pause", widthSize: 40, heightSize: 40, xPos: 0, yPos: -280, zPos: 0)
         addImage(imageName: "button_move_right", name: "button_move_right", widthSize: 60, heightSize: 60, xPos: 60, yPos: -280, zPos: 0)
         addImage(imageName: "button_move_down", name: "button_move_down", widthSize: 60, heightSize: 60, xPos: 0, yPos: -345, zPos: 0)
         
-        arrangePuzzle(arrangingLevelNumber: currentLevel)
+        arrangePuzzle(arrangingLevelNumber: chosenLevel)
         
         setUpSFXButton()
         setUpSFXStage()
@@ -58,7 +58,7 @@ extension StageController {
             
             for index in 1...56 {
                 if node.name == "ss\(index)" {
-                    if CoreDataManager.shared.playerCurrentSFX == true {
+                    if CoreDataManager.shared.playerCurrentSFXisOff == false {
                         soundSFXStage?.play()
                     }
                     
@@ -73,7 +73,7 @@ extension StageController {
             }
             
             if (node.name == "button_move_up") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXStage?.play()
                 }
                 
@@ -92,10 +92,10 @@ extension StageController {
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingWinLevelNumber: currentLevel)
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
             }
             else if (node.name == "button_move_left") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXStage?.play()
                 }
                 
@@ -114,25 +114,25 @@ extension StageController {
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingWinLevelNumber: currentLevel)
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
             }
             
             else if (node.name == "button_pause") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
                 makePausePopUp()
             }
             else if (node.name == "button_close") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
                 deletePausePopUp()
             }
             else if (node.name == "button_setting" || node.name == "label_setting") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -140,7 +140,7 @@ extension StageController {
                 deletePausePopUp()
             }
             else if (node.name == "button_menu" || node.name == "label_menu") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -152,7 +152,7 @@ extension StageController {
                 }
             }
             else if (node.name == "button_back") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -160,16 +160,16 @@ extension StageController {
                 makePausePopUp()
             }
             else if (node.name == "button_bgm" || node.name == "label_bgm") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
-                if CoreDataManager.shared.playerCurrentBGM == true {
+                if CoreDataManager.shared.playerCurrentBGMisOff == false {
                     AudioManager.shared.stopBGM()
                     
                     bgmLabel.text = "BGM: OFF"
                     
-                    CoreDataManager.shared.playerCurrentBGM = false
+                    CoreDataManager.shared.playerCurrentBGMisOff = true
                     CoreDataManager.shared.updateData()
                 }
                 else {
@@ -177,15 +177,15 @@ extension StageController {
                     
                     bgmLabel.text = "BGM: ON"
                     
-                    CoreDataManager.shared.playerCurrentBGM = true
+                    CoreDataManager.shared.playerCurrentBGMisOff = false
                     CoreDataManager.shared.updateData()
                 }
             }
             else if (node.name == "button_sfx" || node.name == "label_sfx") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     sfxLabel.text = "SFX: OFF"
                     
-                    CoreDataManager.shared.playerCurrentSFX = false
+                    CoreDataManager.shared.playerCurrentSFXisOff = true
                     CoreDataManager.shared.updateData()
                 }
                 else {
@@ -193,13 +193,13 @@ extension StageController {
                     
                     sfxLabel.text = "SFX: ON"
                     
-                    CoreDataManager.shared.playerCurrentSFX = true
+                    CoreDataManager.shared.playerCurrentSFXisOff = false
                     CoreDataManager.shared.updateData()
                 }
             }
             
             else if (node.name == "button_move_right") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXStage?.play()
                 }
                 
@@ -218,10 +218,10 @@ extension StageController {
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingWinLevelNumber: currentLevel)
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
             }
             else if (node.name == "button_move_down") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXStage?.play()
                 }
                 
@@ -240,7 +240,7 @@ extension StageController {
                 }
                 characterTouchBorder = false
                 
-                checkWinCondition(checkingWinLevelNumber: currentLevel)
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
             }
             
         }
@@ -251,16 +251,21 @@ extension StageController {
 extension StageController {
     
     func moveToFinishScene() {
-        CoreDataManager.shared.playerCurrentLevel = currentLevel + 1
-//        print("playerCurrentLevel before = \(CoreDataManager.shared.playerCurrentLevel)")
-//        print("currentLevel before = \(CoreDataManager.shared.readData().currentLevel)")
-        CoreDataManager.shared.updateData()
-//        print("playerCurrentLevel after = \(CoreDataManager.shared.playerCurrentLevel)")
-//        print("currentLevel after = \(CoreDataManager.shared.readData().currentLevel)")
+        if CoreDataManager.shared.playerCurrentSFXisOff == false {
+            soundSFXStage?.play()
+        }
         
-        if let nextScene = SKScene(fileNamed: "FinishScene") {
-            self.scene?.scaleMode = .aspectFill
-            self.scene?.view?.presentScene(nextScene)
+        if chosenLevel == CoreDataManager.shared.playerCurrentLevel {
+            CoreDataManager.shared.playerCurrentLevel = chosenLevel + 1
+
+            CoreDataManager.shared.updateData()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            if let nextScene = SKScene(fileNamed: "FinishScene") {
+                self.scene?.scaleMode = .aspectFill
+                self.scene?.view?.presentScene(nextScene)
+            }
         }
     }
     
@@ -285,6 +290,11 @@ extension StageController {
             
         case 1:
             if newCharacterX == 49 && newCharacterY == 98 {
+                moveToFinishScene()
+            }
+            
+        case 2:
+            if newCharacterX == 0 && newCharacterY == -49 {
                 moveToFinishScene()
             }
             

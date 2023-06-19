@@ -55,6 +55,27 @@ class StageManager: ConstructController {
             addPuzzle(puzzleName: "stage_shape_finish", name: "ss33", xPos: 49, yPos: 98, rotatePuzzle: 4, trueDirection: 4, boolDirection: true)
             addCharacter(xPos: -49, yPos: -49)
             
+        case 2:
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss9", xPos: -98, yPos: -49, rotatePuzzle: 2, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss10", xPos: -49, yPos: -49, rotatePuzzle: 2, trueDirection: 3, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_finish", name: "ss11", xPos: 0, yPos: -49, rotatePuzzle: 4, trueDirection: 4, boolDirection: true)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss15", xPos: -147, yPos: 0, rotatePuzzle: 1, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss16", xPos: -98, yPos: 0, rotatePuzzle: 1, trueDirection: 2, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss18", xPos: 0, yPos: 0, rotatePuzzle: 1, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss22", xPos: -147, yPos: 49, rotatePuzzle: 2, trueDirection: 4, boolDirection: true)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss25", xPos: 0, yPos: 49, rotatePuzzle: 1, trueDirection: 3, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss26", xPos: 49, yPos: 49, rotatePuzzle: 3, trueDirection: 1, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss29", xPos: -147, yPos: 98, rotatePuzzle: 4, trueDirection: 3, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss30", xPos: -98, yPos: 98, rotatePuzzle: 3, trueDirection: 1, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss33", xPos: 49, yPos: 98, rotatePuzzle: 3, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_long", name: "ss37", xPos: -98, yPos: 147, rotatePuzzle: 1, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss39", xPos: 0, yPos: 147, rotatePuzzle: 2, trueDirection: 4, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss40", xPos: 49, yPos: 147, rotatePuzzle: 3, trueDirection: 2, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss44", xPos: -98, yPos: 196, rotatePuzzle: 1, trueDirection: 3, boolDirection: false)
+            addPuzzle(puzzleName: "stage_shape_start", name: "ss45", xPos: -49, yPos: 196, rotatePuzzle: 4, trueDirection: 4, boolDirection: true)
+            addPuzzle(puzzleName: "stage_shape_l", name: "ss46", xPos: 0, yPos: 196, rotatePuzzle: 3, trueDirection: 2, boolDirection: false)
+            addCharacter(xPos: -49, yPos: 196)
+            
         default:
             break
         }

@@ -28,7 +28,7 @@ class LandingController: ConstructController {
             let node = self.atPoint(location)
             
             if (node.name == "button_start" || node.name == "label_start") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -40,7 +40,7 @@ class LandingController: ConstructController {
                 }
             }
             else if (node.name == "button_achievement" || node.name == "label_achievement") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -52,7 +52,7 @@ class LandingController: ConstructController {
                 }
             }
             else if (node.name == "button_setting" || node.name == "label_setting") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
