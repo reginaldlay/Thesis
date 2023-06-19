@@ -26,7 +26,7 @@ class AchievementController: ConstructController {
             let node = self.atPoint(location)
             
             if (node.name == "button_back") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 

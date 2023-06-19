@@ -27,7 +27,7 @@ class SettingController: ConstructController {
             let node = self.atPoint(location)
             
             if node.name == "button_back" {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
@@ -39,16 +39,16 @@ class SettingController: ConstructController {
                 }
             }
             else if (node.name == "button_bgm" || node.name == "label_bgm") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
-                if CoreDataManager.shared.playerCurrentBGM == true {
+                if CoreDataManager.shared.playerCurrentBGMisOff == false {
                     AudioManager.shared.stopBGM()
                     
                     settingBGMLabel.text = "BGM: OFF"
                     
-                    CoreDataManager.shared.playerCurrentBGM = false
+                    CoreDataManager.shared.playerCurrentBGMisOff = true
                     CoreDataManager.shared.updateData()
                 }
                 else {
@@ -56,15 +56,15 @@ class SettingController: ConstructController {
                     
                     settingBGMLabel.text = "BGM: ON"
                     
-                    CoreDataManager.shared.playerCurrentBGM = true
+                    CoreDataManager.shared.playerCurrentBGMisOff = false
                     CoreDataManager.shared.updateData()
                 }
             }
             else if (node.name == "button_sfx" || node.name == "label_sfx") {
-                if CoreDataManager.shared.playerCurrentSFX == true {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     settingSFXLabel.text = "SFX: OFF"
                     
-                    CoreDataManager.shared.playerCurrentSFX = false
+                    CoreDataManager.shared.playerCurrentSFXisOff = true
                     CoreDataManager.shared.updateData()
                 }
                 else {
@@ -72,7 +72,7 @@ class SettingController: ConstructController {
                     
                     settingSFXLabel.text = "SFX: ON"
                     
-                    CoreDataManager.shared.playerCurrentSFX = true
+                    CoreDataManager.shared.playerCurrentSFXisOff = false
                     CoreDataManager.shared.updateData()
                 }
             }

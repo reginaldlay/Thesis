@@ -39,6 +39,25 @@ class ConstructController: SKScene {
     var soundSFXButton: AVAudioPlayer?
     var soundSFXStage: AVAudioPlayer?
     
+    func examine() {
+        print("CDM.s.playerChosenLevel = \(CoreDataManager.shared.playerChosenLevel)")
+        print("CDM.s.rD.chosenLevel = \(CoreDataManager.shared.readData().chosenLevel)")
+        print("CDM.s.playerCurrentLevel = \(CoreDataManager.shared.playerCurrentLevel)")
+        print("CDM.s.rD.currentLevel = \(CoreDataManager.shared.readData().currentLevel)")
+        print("CDM.s.playerCurrentBGMisOff = \(CoreDataManager.shared.playerCurrentBGMisOff)")
+        print("CDM.s.rD.currentBGMisOff = \(CoreDataManager.shared.readData().currentBGMisOff)")
+        print("CDM.s.playerCurrentSFXisOff = \(CoreDataManager.shared.playerCurrentSFXisOff)")
+        print("CDM.s.rD.currentSFXisOff = \(CoreDataManager.shared.readData().currentSFXisOff)")
+        print("====================================================================================")
+    }
+    
+    func readPlayerData() {
+        CoreDataManager.shared.playerChosenLevel = CoreDataManager.shared.readData().currentLevel
+        CoreDataManager.shared.playerCurrentLevel = CoreDataManager.shared.readData().currentLevel
+        CoreDataManager.shared.playerCurrentBGMisOff = CoreDataManager.shared.readData().currentBGMisOff
+        CoreDataManager.shared.playerCurrentSFXisOff = CoreDataManager.shared.readData().currentSFXisOff
+    }
+    
     func addImage(imageName: String, name: String, widthSize: CGFloat, heightSize: CGFloat, xPos: CGFloat, yPos: CGFloat, zPos: CGFloat) {
         let sceneImage = SKSpriteNode(imageNamed: imageName)
         sceneImage.name = name
@@ -131,7 +150,7 @@ class ConstructController: SKScene {
         addChild(bgmButton)
         
         bgmLabel.name = "label_bgm"
-        if CoreDataManager.shared.playerCurrentBGM == true {
+        if CoreDataManager.shared.playerCurrentBGMisOff == false {
             bgmLabel.text = "BGM: ON"
         }
         else {
@@ -151,7 +170,7 @@ class ConstructController: SKScene {
         addChild(sfxButton)
         
         sfxLabel.name = "label_sfx"
-        if CoreDataManager.shared.playerCurrentSFX == true {
+        if CoreDataManager.shared.playerCurrentSFXisOff == false {
             sfxLabel.text = "SFX: ON"
         }
         else {
@@ -252,7 +271,7 @@ class ConstructController: SKScene {
     
     func showSettingLabel() {
         settingBGMLabel.name = "label_bgm"
-        if CoreDataManager.shared.playerCurrentBGM == true {
+        if CoreDataManager.shared.playerCurrentBGMisOff == false {
             settingBGMLabel.text = "BGM: ON"
         }
         else {
@@ -266,7 +285,7 @@ class ConstructController: SKScene {
         addChild(settingBGMLabel)
         
         settingSFXLabel.name = "label_sfx"
-        if CoreDataManager.shared.playerCurrentSFX == true {
+        if CoreDataManager.shared.playerCurrentSFXisOff == false {
             settingSFXLabel.text = "SFX: ON"
         }
         else {

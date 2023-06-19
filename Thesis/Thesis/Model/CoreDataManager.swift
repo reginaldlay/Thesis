@@ -15,9 +15,10 @@ class CoreDataManager {
     let persistentContainer: NSPersistentContainer!
     let viewContext: NSManagedObjectContext!
     
-    var playerCurrentBGM: Bool = true
+    var playerChosenLevel: Int32 = 0
+    var playerCurrentBGMisOff: Bool = false
     var playerCurrentLevel: Int32 = 0
-    var playerCurrentSFX: Bool = true
+    var playerCurrentSFXisOff: Bool = false
     
     static let shared = CoreDataManager()
     
@@ -40,9 +41,10 @@ class CoreDataManager {
     
     func saveData() {
         let player = Player(context: persistentContainer.viewContext)
-        player.currentBGM = playerCurrentBGM
+        player.chosenLevel = playerChosenLevel
+        player.currentBGMisOff = playerCurrentBGMisOff
         player.currentLevel = playerCurrentLevel
-        player.currentSFX = playerCurrentSFX
+        player.currentSFXisOff = playerCurrentSFXisOff
         
         do {
             try persistentContainer.viewContext.save()
