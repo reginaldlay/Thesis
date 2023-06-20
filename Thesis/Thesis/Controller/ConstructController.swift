@@ -11,9 +11,33 @@ import SpriteKit
 
 class ConstructController: SKScene {
     
+    //tutorial pop up
+    let tutorialRectangle = SKShapeNode(rectOf: CGSize(width: 390, height: 844)) //z 2
+    let tutorialCanvas = SKSpriteNode(imageNamed: "background_base")
+    let tutorialCloseButton = SKSpriteNode(imageNamed: "button_close")
+    let tutorialLabelTitle = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialLabelStep1 = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialImageStep1 = SKSpriteNode(imageNamed: "stage_character")
+    let tutorialLabelStep2 = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialImageStep2 = SKSpriteNode(imageNamed: "stage_shape_finish")
+    let tutorialLabelStep3 = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialImageStep3a = SKSpriteNode(imageNamed: "stage_shape_l")
+    let tutorialImageStep3b = SKSpriteNode(imageNamed: "stage_shape_long")
+    let tutorialImageStep3c = SKSpriteNode(imageNamed: "stage_shape_t")
+    let tutorialImageStep3d = SKSpriteNode(imageNamed: "stage_shape_plus")
+    let tutorialLabelStep4 = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialImageStep4a = SKSpriteNode(imageNamed: "button_move_up")
+    let tutorialImageStep4b = SKSpriteNode(imageNamed: "button_move_left")
+    let tutorialImageStep4c = SKSpriteNode(imageNamed: "button_move_right")
+    let tutorialImageStep4d = SKSpriteNode(imageNamed: "button_move_down")
+    let tutorialLabelStep5 = SKLabelNode(fontNamed: "Futura Medium")
+    let tutorialImageStep5 = SKSpriteNode(imageNamed: "button_pause")
+    
     //pause pop up
     let pauseRectangle = SKShapeNode(rectOf: CGSize(width: 390, height: 844))
-    let closeButton = SKSpriteNode(imageNamed: "button_close")
+    let pauseCloseButton = SKSpriteNode(imageNamed: "button_close")
+    let tutorialButton = SKSpriteNode(imageNamed: "button_stage_pause")
+    let tutorialLabel = SKLabelNode(fontNamed: "Futura Medium")
     let settingButton = SKSpriteNode(imageNamed: "button_stage_pause")
     let settingLabel = SKLabelNode(fontNamed: "Futura Medium")
     let menuButton = SKSpriteNode(imageNamed: "button_stage_pause")
@@ -21,7 +45,7 @@ class ConstructController: SKScene {
     
     //setting pop up
     let settingRectangle = SKShapeNode(rectOf: CGSize(width: 390, height: 844))
-    let backButton = SKSpriteNode(imageNamed: "button_back")
+    let settingBackButton = SKSpriteNode(imageNamed: "button_tutorial_back")
     let bgmButton = SKSpriteNode(imageNamed: "button_landing")
     let bgmLabel = SKLabelNode(fontNamed: "Futura Medium")
     let sfxButton = SKSpriteNode(imageNamed: "button_stage_pause")
@@ -82,66 +106,227 @@ class ConstructController: SKScene {
     func makePausePopUp() {
         pauseRectangle.position = CGPoint(x: 0, y: 0)
         pauseRectangle.zPosition = 2
-        pauseRectangle.fillColor = UIColor.gray.withAlphaComponent(0.7)
+        pauseRectangle.fillColor = UIColor.gray.withAlphaComponent(0.9)
         addChild(pauseRectangle)
         
-        closeButton.name = "button_close"
-        closeButton.size = CGSize(width: 50, height: 50)
-        closeButton.position = CGPoint(x: -140, y: 320)
-        closeButton.zPosition = 3
-        addChild(closeButton)
+        pauseCloseButton.name = "button_close"
+        pauseCloseButton.size = CGSize(width: 50, height: 50)
+        pauseCloseButton.position = CGPoint(x: -140, y: 320)
+        pauseCloseButton.zPosition = 3
+        addChild(pauseCloseButton)
+        
+        tutorialButton.name = "button_tutorial"
+        tutorialButton.size = CGSize(width: 200, height: 120)
+        tutorialButton.position = CGPoint(x: 0, y: 180)
+        tutorialButton.zPosition = 3
+        addChild(tutorialButton)
+        
+        tutorialLabel.name = "label_tutorial"
+        tutorialLabel.text = "Tutorial"
+        tutorialLabel.fontSize = 28
+        tutorialLabel.fontColor = .black
+        tutorialLabel.horizontalAlignmentMode = .center
+        tutorialLabel.position = CGPoint(x: 0, y: 173)
+        tutorialLabel.zPosition = 4
+        addChild(tutorialLabel)
         
         settingButton.name = "button_setting"
         settingButton.size = CGSize(width: 200, height: 120)
-        settingButton.position = CGPoint(x: 0, y: 100)
+        settingButton.position = CGPoint(x: 0, y: 0)
         settingButton.zPosition = 3
         addChild(settingButton)
         
         settingLabel.name = "label_setting"
         settingLabel.text = "Setting"
-        settingLabel.fontSize = 30
+        settingLabel.fontSize = 28
         settingLabel.fontColor = .black
         settingLabel.horizontalAlignmentMode = .center
-        settingLabel.position = CGPoint(x: 0, y: 94)
+        settingLabel.position = CGPoint(x: 0, y: -5)
         settingLabel.zPosition = 4
         addChild(settingLabel)
         
         menuButton.name = "button_menu"
         menuButton.size = CGSize(width: 200, height: 120)
-        menuButton.position = CGPoint(x: 0, y: -101)
+        menuButton.position = CGPoint(x: 0, y: -180)
         menuButton.zPosition = 3
         addChild(menuButton)
         
         menuLabel.name = "label_menu"
         menuLabel.text = "Back to Menu"
-        menuLabel.fontSize = 26
+        menuLabel.fontSize = 25
         menuLabel.fontColor = .black
         menuLabel.horizontalAlignmentMode = .center
-        menuLabel.position = CGPoint(x: 0, y: -105)
+        menuLabel.position = CGPoint(x: 0, y: -186)
         menuLabel.zPosition = 4
         addChild(menuLabel)
     }
     
     func deletePausePopUp() {
         pauseRectangle.removeFromParent()
-        closeButton.removeFromParent()
+        pauseCloseButton.removeFromParent()
+        tutorialButton.removeFromParent()
+        tutorialLabel.removeFromParent()
         menuButton.removeFromParent()
         menuLabel.removeFromParent()
         settingButton.removeFromParent()
         settingLabel.removeFromParent()
     }
     
+    func makeTutorialPopUp() {
+        tutorialRectangle.position = CGPoint(x: 0, y: 0)
+        tutorialRectangle.zPosition = 2
+        tutorialRectangle.fillColor = UIColor.gray.withAlphaComponent(0.9)
+        addChild(tutorialRectangle)
+        
+        tutorialCanvas.size = CGSize(width: 330, height: 700)
+        tutorialCanvas.position = CGPoint(x: 0, y: 0)
+        tutorialCanvas.zPosition = 3
+        addChild(tutorialCanvas)
+        
+        tutorialCloseButton.name = "button_tutorial_close"
+        tutorialCloseButton.size = CGSize(width: 40, height: 40)
+        tutorialCloseButton.position = CGPoint(x: -125, y: 310)
+        tutorialCloseButton.zPosition = 4
+        addChild(tutorialCloseButton)
+        
+        tutorialLabelTitle.text = "How to play?"
+        tutorialLabelTitle.fontSize = 26
+        tutorialLabelTitle.fontColor = .black
+        tutorialLabelTitle.horizontalAlignmentMode = .center
+        tutorialLabelTitle.position = CGPoint(x: 0, y: 240)
+        tutorialLabelTitle.zPosition = 4
+        addChild(tutorialLabelTitle)
+        
+        tutorialLabelStep1.text = "1. This is your cute ordinary ball!"
+        tutorialLabelStep1.fontSize = 14
+        tutorialLabelStep1.fontColor = .black
+        tutorialLabelStep1.horizontalAlignmentMode = .center
+        tutorialLabelStep1.position = CGPoint(x: 0, y: 180)
+        tutorialLabelStep1.zPosition = 4
+        addChild(tutorialLabelStep1)
+        
+        tutorialImageStep1.size = CGSize(width: 30, height: 30)
+        tutorialImageStep1.position = CGPoint(x: 0, y: 150)
+        tutorialImageStep1.zPosition = 4
+        addChild(tutorialImageStep1)
+        
+        tutorialLabelStep2.text = "2. Bring the ball to finish square"
+        tutorialLabelStep2.fontSize = 14
+        tutorialLabelStep2.fontColor = .black
+        tutorialLabelStep2.horizontalAlignmentMode = .center
+        tutorialLabelStep2.position = CGPoint(x: 0, y: 100)
+        tutorialLabelStep2.zPosition = 4
+        addChild(tutorialLabelStep2)
+        
+        tutorialImageStep2.size = CGSize(width: 30, height: 30)
+        tutorialImageStep2.position = CGPoint(x: 0, y: 70)
+        tutorialImageStep2.zPosition = 4
+        addChild(tutorialImageStep2)
+        
+        tutorialLabelStep3.text = "3. You can tap the bridge to connect them"
+        tutorialLabelStep3.fontSize = 14
+        tutorialLabelStep3.fontColor = .black
+        tutorialLabelStep3.horizontalAlignmentMode = .center
+        tutorialLabelStep3.position = CGPoint(x: 0, y: 20)
+        tutorialLabelStep3.zPosition = 4
+        addChild(tutorialLabelStep3)
+        
+        tutorialImageStep3a.size = CGSize(width: 30, height: 30)
+        tutorialImageStep3a.position = CGPoint(x: -60, y: -10)
+        tutorialImageStep3a.zPosition = 4
+        addChild(tutorialImageStep3a)
+        
+        tutorialImageStep3b.size = CGSize(width: 30, height: 30)
+        tutorialImageStep3b.position = CGPoint(x: -20, y: -10)
+        tutorialImageStep3b.zPosition = 4
+        addChild(tutorialImageStep3b)
+        
+        tutorialImageStep3c.size = CGSize(width: 30, height: 30)
+        tutorialImageStep3c.position = CGPoint(x: 20, y: -10)
+        tutorialImageStep3c.zPosition = 4
+        addChild(tutorialImageStep3c)
+        
+        tutorialImageStep3d.size = CGSize(width: 30, height: 30)
+        tutorialImageStep3d.position = CGPoint(x: 60, y: -10)
+        tutorialImageStep3d.zPosition = 4
+        addChild(tutorialImageStep3d)
+        
+        tutorialLabelStep4.text = "4. Move the ball by tapping the movement button"
+        tutorialLabelStep4.fontSize = 13
+        tutorialLabelStep4.fontColor = .black
+        tutorialLabelStep4.horizontalAlignmentMode = .center
+        tutorialLabelStep4.position = CGPoint(x: 0, y: -60)
+        tutorialLabelStep4.zPosition = 4
+        addChild(tutorialLabelStep4)
+        
+        tutorialImageStep4a.size = CGSize(width: 30, height: 30)
+        tutorialImageStep4a.position = CGPoint(x: 0, y: -90)
+        tutorialImageStep4a.zPosition = 4
+        addChild(tutorialImageStep4a)
+        
+        tutorialImageStep4b.size = CGSize(width: 30, height: 30)
+        tutorialImageStep4b.position = CGPoint(x: -30, y: -120)
+        tutorialImageStep4b.zPosition = 4
+        addChild(tutorialImageStep4b)
+        
+        tutorialImageStep4c.size = CGSize(width: 30, height: 30)
+        tutorialImageStep4c.position = CGPoint(x: 30, y: -120)
+        tutorialImageStep4c.zPosition = 4
+        addChild(tutorialImageStep4c)
+        
+        tutorialImageStep4d.size = CGSize(width: 30, height: 30)
+        tutorialImageStep4d.position = CGPoint(x: 0, y: -150)
+        tutorialImageStep4d.zPosition = 4
+        addChild(tutorialImageStep4d)
+        
+        tutorialLabelStep5.text = "5. Find me again in here ^^"
+        tutorialLabelStep5.fontSize = 14
+        tutorialLabelStep5.fontColor = .black
+        tutorialLabelStep5.horizontalAlignmentMode = .center
+        tutorialLabelStep5.position = CGPoint(x: 0, y: -200)
+        tutorialLabelStep5.zPosition = 4
+        addChild(tutorialLabelStep5)
+        
+        tutorialImageStep5.size = CGSize(width: 30, height: 30)
+        tutorialImageStep5.position = CGPoint(x: 0, y: -230)
+        tutorialImageStep5.zPosition = 4
+        addChild(tutorialImageStep5)
+    }
+    
+    func deleteTutorialPopUp() {
+        tutorialRectangle.removeFromParent()
+        tutorialCanvas.removeFromParent()
+        tutorialCloseButton.removeFromParent()
+        tutorialLabelTitle.removeFromParent()
+        tutorialLabelStep1.removeFromParent()
+        tutorialImageStep1.removeFromParent()
+        tutorialLabelStep2.removeFromParent()
+        tutorialImageStep2.removeFromParent()
+        tutorialLabelStep3.removeFromParent()
+        tutorialImageStep3a.removeFromParent()
+        tutorialImageStep3b.removeFromParent()
+        tutorialImageStep3c.removeFromParent()
+        tutorialImageStep3d.removeFromParent()
+        tutorialLabelStep4.removeFromParent()
+        tutorialImageStep4a.removeFromParent()
+        tutorialImageStep4b.removeFromParent()
+        tutorialImageStep4c.removeFromParent()
+        tutorialImageStep4d.removeFromParent()
+        tutorialLabelStep5.removeFromParent()
+        tutorialImageStep5.removeFromParent()
+    }
+    
     func makeSettingPopUp() {
         settingRectangle.position = CGPoint(x: 0, y: 0)
         settingRectangle.zPosition = 2
-        settingRectangle.fillColor = UIColor.gray.withAlphaComponent(0.7)
+        settingRectangle.fillColor = UIColor.gray.withAlphaComponent(0.9)
         addChild(settingRectangle)
         
-        backButton.name = "button_back"
-        backButton.size = CGSize(width: 55, height: 50)
-        backButton.position = CGPoint(x: -140, y: 320)
-        backButton.zPosition = 3
-        addChild(backButton)
+        settingBackButton.name = "button_back"
+        settingBackButton.size = CGSize(width: 55, height: 50)
+        settingBackButton.position = CGPoint(x: -140, y: 320)
+        settingBackButton.zPosition = 3
+        addChild(settingBackButton)
         
         bgmButton.name = "button_bgm"
         bgmButton.size = CGSize(width: 200, height: 120)
@@ -157,7 +342,7 @@ class ConstructController: SKScene {
             bgmLabel.text = "BGM: OFF"
         }
         bgmLabel.fontSize = 30
-        bgmLabel.fontColor = .black
+        bgmLabel.fontColor = .white
         bgmLabel.horizontalAlignmentMode = .center
         bgmLabel.position = CGPoint(x: 0, y: 94)
         bgmLabel.zPosition = 4
@@ -177,7 +362,7 @@ class ConstructController: SKScene {
             sfxLabel.text = "SFX: OFF"
         }
         sfxLabel.fontSize = 30
-        sfxLabel.fontColor = .black
+        sfxLabel.fontColor = .white
         sfxLabel.horizontalAlignmentMode = .center
         sfxLabel.position = CGPoint(x: 0, y: -108)
         sfxLabel.zPosition = 4
@@ -188,7 +373,7 @@ class ConstructController: SKScene {
     
     func deleteSettingPopUp() {
         settingRectangle.removeFromParent()
-        backButton.removeFromParent()
+        settingBackButton.removeFromParent()
         bgmButton.removeFromParent()
         bgmLabel.removeFromParent()
         sfxButton.removeFromParent()
@@ -278,7 +463,7 @@ class ConstructController: SKScene {
             settingBGMLabel.text = "BGM: OFF"
         }
         settingBGMLabel.fontSize = 30
-        settingBGMLabel.color = .black
+        settingBGMLabel.fontColor = .white
         settingBGMLabel.horizontalAlignmentMode = .center
         settingBGMLabel.position = CGPoint(x: 0, y: 94)
         settingBGMLabel.zPosition = 1
@@ -292,7 +477,7 @@ class ConstructController: SKScene {
             settingSFXLabel.text = "SFX: OFF"
         }
         settingSFXLabel.fontSize = 30
-        settingSFXLabel.color = .black
+        settingSFXLabel.fontColor = .white
         settingSFXLabel.horizontalAlignmentMode = .center
         settingSFXLabel.position = CGPoint(x: 0, y: -108)
         settingSFXLabel.zPosition = 1

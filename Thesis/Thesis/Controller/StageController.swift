@@ -41,6 +41,10 @@ class StageController: StageManager {
         
         arrangePuzzle(arrangingLevelNumber: chosenLevel)
         
+        if CoreDataManager.shared.playerCurrentLevel == 0 {
+            makeTutorialPopUp()
+        }
+        
         setUpSFXButton()
         setUpSFXStage()
     }
@@ -72,6 +76,7 @@ extension StageController {
                 }
             }
             
+            //movement
             if (node.name == "button_move_up") {
                 if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXStage?.play()
@@ -84,6 +89,7 @@ extension StageController {
                     
                     if characterTouchBorder {
                         newCharacterY = newCharacterY - 49
+                        print("kena woi")
                     }
                     else {
                         let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
@@ -116,7 +122,52 @@ extension StageController {
                 
                 checkWinCondition(checkingWinLevelNumber: chosenLevel)
             }
+            else if (node.name == "button_move_right") {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
+                    soundSFXStage?.play()
+                }
+                
+                if !characterTouchBorder {
+                    newCharacterX = (currentCharacterX ?? .zero) + 49.0
+                    
+                    checkBorder()
+                    
+                    if characterTouchBorder {
+                        newCharacterX = newCharacterX - 49
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                    }
+                }
+                characterTouchBorder = false
+                
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
+            }
+            else if (node.name == "button_move_down") {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
+                    soundSFXStage?.play()
+                }
+                
+                if !characterTouchBorder {
+                    newCharacterY = (currentCharacterY ?? .zero) - 49.0
+                    
+                    checkBorder()
+                    
+                    if characterTouchBorder {
+                        newCharacterY = newCharacterY + 49
+                    }
+                    else {
+                        let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
+                        stagePuzzleCharacter?.run(moveCharacter)
+                    }
+                }
+                characterTouchBorder = false
+                
+                checkWinCondition(checkingWinLevelNumber: chosenLevel)
+            }
             
+            //pause pop up
             else if (node.name == "button_pause") {
                 if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
@@ -131,13 +182,21 @@ extension StageController {
                 
                 deletePausePopUp()
             }
+            else if (node.name == "button_tutorial" || node.name == "label_tutorial") {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
+                    soundSFXButton?.play()
+                }
+                
+                deletePausePopUp()
+                makeTutorialPopUp()
+            }
             else if (node.name == "button_setting" || node.name == "label_setting") {
                 if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
                 }
                 
-                makeSettingPopUp()
                 deletePausePopUp()
+                makeSettingPopUp()
             }
             else if (node.name == "button_menu" || node.name == "label_menu") {
                 if CoreDataManager.shared.playerCurrentSFXisOff == false {
@@ -151,6 +210,17 @@ extension StageController {
                     }
                 }
             }
+            
+            //tutorial pop up
+            else if (node.name == "button_tutorial_close") {
+                if CoreDataManager.shared.playerCurrentSFXisOff == false {
+                    soundSFXButton?.play()
+                }
+                
+                deleteTutorialPopUp()
+            }
+            
+            //setting pop up
             else if (node.name == "button_back") {
                 if CoreDataManager.shared.playerCurrentSFXisOff == false {
                     soundSFXButton?.play()
@@ -198,50 +268,7 @@ extension StageController {
                 }
             }
             
-            else if (node.name == "button_move_right") {
-                if CoreDataManager.shared.playerCurrentSFXisOff == false {
-                    soundSFXStage?.play()
-                }
-                
-                if !characterTouchBorder {
-                    newCharacterX = (currentCharacterX ?? .zero) + 49.0
-                    
-                    checkBorder()
-                    
-                    if characterTouchBorder {
-                        newCharacterX = newCharacterX - 49
-                    }
-                    else {
-                        let moveCharacter = SKAction.moveTo(x: newCharacterX, duration: 0.1)
-                        stagePuzzleCharacter?.run(moveCharacter)
-                    }
-                }
-                characterTouchBorder = false
-                
-                checkWinCondition(checkingWinLevelNumber: chosenLevel)
-            }
-            else if (node.name == "button_move_down") {
-                if CoreDataManager.shared.playerCurrentSFXisOff == false {
-                    soundSFXStage?.play()
-                }
-                
-                if !characterTouchBorder {
-                    newCharacterY = (currentCharacterY ?? .zero) - 49.0
-                    
-                    checkBorder()
-                    
-                    if characterTouchBorder {
-                        newCharacterY = newCharacterY + 49
-                    }
-                    else {
-                        let moveCharacter = SKAction.moveTo(y: newCharacterY, duration: 0.1)
-                        stagePuzzleCharacter?.run(moveCharacter)
-                    }
-                }
-                characterTouchBorder = false
-                
-                checkWinCondition(checkingWinLevelNumber: chosenLevel)
-            }
+            
             
         }
     }

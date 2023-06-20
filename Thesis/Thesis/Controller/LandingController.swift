@@ -15,9 +15,9 @@ class LandingController: ConstructController {
         addImage(imageName: "button_landing", name: "button_start", widthSize: 200, heightSize: 120, xPos: 0, yPos: 180, zPos: 0)
         addImage(imageName: "button_landing", name: "button_achievement", widthSize: 200, heightSize: 120, xPos: 0, yPos: 0, zPos: 0)
         addImage(imageName: "button_landing", name: "button_setting", widthSize: 200, heightSize: 120, xPos: 0, yPos: -180, zPos: 0)
-        addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 170, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_start", text: "Start", fontSize: 28, fontColor: .black, xAlignment: .center, xPos: 0, yPos: 173, zPos: 1)
         addLabel(fontName: "Futura Medium", name: "label_achievement", text: "Achievement", fontSize: 27, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -5, zPos: 1)
-        addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 30, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -190, zPos: 1)
+        addLabel(fontName: "Futura Medium", name: "label_setting", text: "Setting", fontSize: 28, fontColor: .black, xAlignment: .center, xPos: 0, yPos: -186, zPos: 1)
         
         setUpSFXButton()
     }
