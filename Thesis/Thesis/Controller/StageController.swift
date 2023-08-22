@@ -321,6 +321,41 @@ extension StageController {
             }
             
         case 2:
+            if newCharacterX == -98 && newCharacterY == 98 {
+                moveToFinishScene()
+            }
+            
+        case 3:
+            if newCharacterX == 98 && newCharacterY == 0 {
+                moveToFinishScene()
+            }
+            
+        case 4:
+            if newCharacterX == 49 && newCharacterY == 98 {
+                moveToFinishScene()
+            }
+            
+        case 5:
+            if newCharacterX == 0 && newCharacterY == 0 {
+                moveToFinishScene()
+            }
+            
+        case 6:
+            if newCharacterX == -98 && newCharacterY == 196 {
+                moveToFinishScene()
+            }
+            
+        case 7:
+            if newCharacterX == 0 && newCharacterY == -49 {
+                moveToFinishScene()
+            }
+            
+        case 8:
+            if newCharacterX == 0 && newCharacterY == 196 {
+                moveToFinishScene()
+            }
+            
+        case 9:
             if newCharacterX == 0 && newCharacterY == -49 {
                 moveToFinishScene()
             }
